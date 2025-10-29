@@ -673,10 +673,25 @@ Expected Performance:
 ## 📋 Advanced Analysis Questions
 
 1. **Service Task Priority**: ผลกระทบของ Priority ต่อ Timer Accuracy?
+    • Task ที่ดูแล Timer หรือ Callback ต้องมี priority สูงพอ → ลด latency ในการเรียก callback
+    • Priority ต่ำเกินไป → callback ถูก delay → timer accuracy ลดลง
 2. **Callback Performance**: วิธีการเพิ่มประสิทธิภาพ Callback Functions?
+    • เขียน callback ให้ เร็วที่สุด (non-blocking)
+    • ใช้ queue/semaphore ส่งงานหนักไป task อื่น
+    • หลีกเลี่ยงการใช้ delay หรือ blocking calls ภายใน callback
 3. **Memory Management**: กลยุทธ์การจัดการ Memory สำหรับ Dynamic Timers?
+    • จัดสรร memory แบบ dynamic แต่ควบคุมขนาดสูงสุด
+    • ใช้ pool allocator สำหรับ timer objects
+    • ป้องกัน memory leak และ fragmentation ในระบบ long-running
 4. **Error Recovery**: วิธีการ Handle Timer System Failures?
+    • ใช้ watchdog timer เพื่อตรวจจับระบบค้าง
+    • log error และ reset timer หรือ task ที่ล้มเหลว
+    • มี fallback mechanism เช่น restart timer หรือ skip callback
 5. **Production Deployment**: การปรับแต่งสำหรับ Production Environment?
+    • ปรับ priority และ stack size ให้เหมาะสม
+    • ลด log verbosity เพื่อประหยัด CPU
+    • ตรวจสอบ memory usage / queue saturation
+    • เพิ่ม monitoring & watchdog เพื่อความเสถียรสูงสุด
 
 ## 🚀 ความท้าทายระดับผู้เชี่ยวชาญ
 

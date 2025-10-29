@@ -453,10 +453,24 @@ void dynamic_stack_monitor(TaskHandle_t task_handle, const char* task_name)
 ## คำถามสำหรับวิเคราะห์
 
 1. Task ไหนใช้ stack มากที่สุด? เพราะอะไร?
+    Task ที่มี ฟังก์ชันเรียกซ้อนเยอะ / ตัวแปร local ขนาดใหญ่ / ใช้ recursion จะใช้ stack มากที่สุด เพราะ stack เก็บข้อมูลตัวแปรภายในและ return address ของฟังก์ชัน
 2. การใช้ heap แทน stack มีข้อดีอย่างไร?
+    • ใช้ memory แบบ dynamic → ยืดหยุ่นกว่า
+    • ลดความเสี่ยง overflow ของ stack
+    • เหมาะกับข้อมูลขนาดใหญ่หรือ lifetime ยาวกว่าหน่วยงาน task
 3. Stack overflow เกิดขึ้นเมื่อไหร่และทำอย่างไรป้องกัน?
+    กิดเมื่อ task ใช้ stack เกินขนาดที่กำหนด
+    ป้องกันโดย:
+    • ตั้ง stack size ให้เพียงพอ
+    • ใช้ฟังก์ชันตรวจสอบ (uxTaskGetStackHighWaterMark())
+    • หลีกเลี่ยง recursion ลึกและตัวแปร local ขนาดใหญ่
 4. การตั้งค่า stack size ควรพิจารณาจากอะไร?
+    • ขนาดตัวแปร local
+    • จำนวนฟังก์ชันเรียกซ้อน
+    • การใช้ recursion
+    • การใช้งาน library หรือ buffer ขนาดใหญ่ภายใน task
 5. Recursion ส่งผลต่อ stack usage อย่างไร?
+    ใช้ stack เพิ่มขึ้นตามความลึกของการเรียกซ้อน → ยิ่งเรียกซ้อนลึกมาก ยิ่งเสี่ยง stack overflow
 
 ## ผลการทดลองที่คาดหวัง
 

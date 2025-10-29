@@ -417,10 +417,15 @@ ESP_LOGI(TAG, "Task state: %s", state_names[state]);
 ## คำถามทบทวน
 
 1. เหตุใด Task function ต้องมี infinite loop?
+    เพราะ Task ต้องทำงานต่อเนื่องตลอดเวลาในระบบ Multitasking ถ้าไม่มี loop ระบบจะสร้าง task แล้วจบการทำงานทันที ทำให้ task หายไป
 2. ความหมายของ stack size ใน xTaskCreate() คืออะไร?
+    คือ ขนาดหน่วยความจำ (stack memory) ที่จัดให้ task ใช้เก็บตัวแปรภายใน ฟังก์ชันที่เรียกซ้อน และข้อมูลชั่วคราว มีหน่วยเป็น word (4 bytes ต่อ 1 word)
 3. ความแตกต่างระหว่าง vTaskDelay() และ vTaskDelayUntil()?
+    vTaskDelay() หน่วงเวลาจาก เวลาปัจจุบัน ส่วน vTaskDelayUntil() หน่วงจาก เวลารอบก่อนหน้า เพื่อให้รอบเวลาคงที่ เหมาะกับ task แบบ periodic
 4. การใช้ vTaskDelete(NULL) vs vTaskDelete(handle) ต่างกันอย่างไร?
+    vTaskDelete(NULL) ลบ task ปัจจุบัน ที่เรียกฟังก์ชันนี้ ส่วน vTaskDelete(handle) ลบ task อื่น ตาม handle ที่ระบุ
 5. Priority 0 กับ Priority 24 อันไหนสูงกว่า?
+    Priority 24 สูงกว่า เพราะใน FreeRTOS ค่ายิ่งมากหมายถึงความสำคัญสูงกว่า (0 คือ priority ต่ำสุด)
 
 ## บทสรุป
 

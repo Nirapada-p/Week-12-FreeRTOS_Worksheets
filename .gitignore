@@ -1,0 +1,89 @@
+# ESP-IDF Build files
+build/
+sdkconfig.old
+sdkconfig.defaults.old
+
+# CMake cache files
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+
+# Build artifacts
+*.bin
+*.elf
+*.map
+*.o
+*.a
+*.so
+*.lib
+*.dll
+*.exe
+
+# Flash args
+*flash_args*
+flasher_args.json
+
+# ESP-IDF specific
+dependencies.lock
+managed_components/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Node.js (if using any JS tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation build
+docs/_build/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
